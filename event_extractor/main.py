@@ -3,18 +3,28 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
+month_num2str = {
+    1: 'january',
+    2: 'february',
+    3: 'march',
+    4: 'april',
+    5: 'may',
+    6: 'june',
+    7: 'july',
+    8: 'august',
+    9: 'september',
+    10: 'october',
+    11: 'november',
+    12: 'december'
+}
+
 
 class Event_extractor:
-    """
-
-    """
 
     @staticmethod
-    def get_usual_events(year: int, month: str) -> List[str]:
+    def get_usual_events(year: int, month: str or int) -> List[str]:
         """
         Get the list of events in the specified year and month
-
-        provide month in the string format like "june", "july"
         """
         headers = {
             'Access-Control-Allow-Origin': '*',
@@ -23,6 +33,9 @@ class Event_extractor:
             'Access-Control-Max-Age': '3600',
             'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
         }
+
+        if isinstance(month, int):
+            month = month_num2str[month]
 
         url = f"https://www.onthisday.com/events/date/{year}/{month}"
         req = requests.get(url, headers)
@@ -37,7 +50,7 @@ class Event_extractor:
         return events
 
     @staticmethod
-    def get_special_events(year: int, month: str, term: str) -> List[str]:
+    def get_special_events(year: int, month: str or int, term: str) -> List[str]:
         """
         Get the list of events in the specified year and month
 
