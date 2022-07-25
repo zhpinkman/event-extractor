@@ -1,4 +1,5 @@
 from setuptools import setup
+from setuptools import find_packages
 
 
 setup(
@@ -7,7 +8,7 @@ setup(
     description='Get the historical events easily',
     author='Zhivar Sourati',
     author_email='zhivarsourati@gmail.com',
-    packages=['event_extractor'],
+    packages=find_packages(include=['event_extractor']),
     zip_safe=False,
     install_requires=[
         'bs4',

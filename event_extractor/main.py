@@ -64,6 +64,9 @@ class Event_extractor:
             'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
         }
 
+        if isinstance(month, int):
+            month = month_num2str[month]
+
         url = f"https://www.onthisday.com/events/date/{year}/{month}"
         req = requests.get(url, headers)
         soup = BeautifulSoup(req.content, 'html.parser')
